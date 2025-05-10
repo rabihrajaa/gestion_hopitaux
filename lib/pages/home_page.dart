@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                   subtitle: Text(hopital.adresse),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(
-                      builder: (_) => UtilisateursPage(hopitalId: hopital.id!),
+                      builder: (_) => AjouterUtilisateurPage(hopitalId: hopital.id!),
                     ));
                   },
                 );

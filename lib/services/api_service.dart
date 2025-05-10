@@ -27,16 +27,21 @@ class ApiService {
     }
   }
 
-  static Future<void> ajouterUtilisateur(Utilisateur utilisateur, int hopitalId) async {
+ static Future<bool> ajouterUtilisateur(Utilisateur utilisateur) async {
+  try {
     final response = await http.post(
-      Uri.parse('$baseUrl/utilisateurs/$hopitalId'),
+      Uri.parse('$baseUrl/utilisateurs'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(utilisateur.toJson()),
+      body: jsonEncode(utilisateur.toJson()),
     );
-    if (response.statusCode != 200 && response.statusCode != 201) {
-      throw Exception('Erreur lors de l\'ajout de l\'utilisateur');
-    }
+
+    return response.statusCode == 200 || response.statusCode == 201;
+  } catch (e) {
+    print("Erreur d'ajout utilisateur: $e");
+    return false;
   }
+}
+
 
   static Future<List<Utilisateur>> fetchUtilisateursByHopital(int hopitalId) async {
     final response = await http.get(Uri.parse('$baseUrl/utilisateurs/hopital/$hopitalId'));
