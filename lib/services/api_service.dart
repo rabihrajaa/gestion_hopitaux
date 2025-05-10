@@ -16,16 +16,36 @@ class ApiService {
     }
   }
 
-  static Future<void> ajouterHopital(Hopital hopital) async {
+
+Future<bool> ajouterHopital(Hopital hopital) async {
+  final url = Uri.parse('http://localhost:8085/hopitaux');
+  
+  try {
     final response = await http.post(
-      Uri.parse('$baseUrl/hopitaux'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(hopital.toJson()),
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        "nom": hopital.nom,
+        "adresse": hopital.adresse,
+        "region": hopital.region,
+        "province": hopital.province,
+        "prefecture": hopital.prefecture,
+      }),
     );
-    if (response.statusCode != 200 && response.statusCode != 201) {
-      throw Exception('Erreur lors de l\'ajout de l\'hôpital');
+      print('Rajaa ${response.statusCode}: ${response.body}');
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      print('Erreur ${response.statusCode}: ${response.body}');
+      return false;
     }
+  } catch (e) {
+    print('Erreur lors de l\'ajout de l\'hôpital: $e');
+    return false;
   }
+}
 
  static Future<bool> ajouterUtilisateur(Utilisateur utilisateur) async {
   try {

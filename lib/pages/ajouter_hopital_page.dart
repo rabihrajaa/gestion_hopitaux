@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/hopital.dart';
 import '../services/api_service.dart';
-
+import 'home_page.dart';
 class AjouterHopitalPage extends StatefulWidget {
   
   @override
@@ -16,7 +16,7 @@ class _AjouterHopitalPageState extends State<AjouterHopitalPage> {
   final provinceController = TextEditingController();
   final prefectureController = TextEditingController();
 
-  void _submit() async {
+void _submit() async {
   if (_formKey.currentState!.validate()) {
     Hopital hopital = Hopital(
       nom: nomController.text,
@@ -27,11 +27,18 @@ class _AjouterHopitalPageState extends State<AjouterHopitalPage> {
     );
 
     try {
-      await ApiService.ajouterHopital(hopital);
+      // Créer une instance de ApiService
+      ApiService apiService = ApiService();
+
+      // Appeler la méthode ajouterHopital sur l'instance
+      await apiService.ajouterHopital(hopital);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Hôpital ajouté avec succès')),
       );
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erreur lors de l\'ajout : $e')),
@@ -39,6 +46,7 @@ class _AjouterHopitalPageState extends State<AjouterHopitalPage> {
     }
   }
 }
+
 
   @override
   Widget build(BuildContext context) {
