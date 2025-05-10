@@ -22,8 +22,8 @@ void _submit() async {
       nom: nomController.text,
       adresse: adresseController.text,
       region: regionController.text,
-      province: provinceController.text,
-      prefecture: prefectureController.text,
+      province: provinceController.text!=null?provinceController.text:null,
+      prefecture: null ,
     );
 
     try {

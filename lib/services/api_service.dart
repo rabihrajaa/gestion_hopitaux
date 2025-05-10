@@ -63,8 +63,8 @@ Future<bool> ajouterHopital(Hopital hopital) async {
 }
 
 
-  static Future<List<Utilisateur>> fetchUtilisateursByHopital(int hopitalId) async {
-    final response = await http.get(Uri.parse('$baseUrl/utilisateurs/hopital/$hopitalId'));
+  static Future<List<Utilisateur>> fetchUtilisateursByHopital() async {
+    final response = await http.get(Uri.parse('$baseUrl/utilisateurs'));
     if (response.statusCode == 200) {
       Iterable data = json.decode(response.body);
       return data.map((e) => Utilisateur.fromJson(e)).toList();

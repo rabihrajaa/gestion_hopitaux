@@ -12,7 +12,7 @@ class UtilisateursPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Utilisateurs")),
       body: FutureBuilder<List<Utilisateur>>(
-        future: ApiService.fetchUtilisateursByHopital(hopitalId),
+        future: ApiService.fetchUtilisateursByHopital(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final utilisateurs = snapshot.data!;
