@@ -63,7 +63,12 @@ class _AjouterUtilisateurPageState extends State<AjouterUtilisateurPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ajouter Utilisateur')),
+      appBar: AppBar(title: Text('Ajouter Utilisateur'),
+       backgroundColor: Colors.blue,
+        elevation: 8,
+        shadowColor: Colors.black54,
+        centerTitle: true,
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Form(

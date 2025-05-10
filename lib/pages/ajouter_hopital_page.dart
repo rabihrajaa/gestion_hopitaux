@@ -51,7 +51,12 @@ void _submit() async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ajouter un Hôpital')),
+      appBar: AppBar(title: Text('Ajouter un Hôpital'),
+       backgroundColor: Colors.blue,
+        elevation: 8,
+        shadowColor: Colors.black54,
+        centerTitle: true,
+      ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Form(
